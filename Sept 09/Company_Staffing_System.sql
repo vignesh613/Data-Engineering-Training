@@ -1,15 +1,15 @@
  CREATE DATABASE IF NOT EXISTS company_db; 
 USE company_db; 
- -- Clean re-run
+ 
  DROP TABLE IF EXISTS staff; 
 DROP TABLE IF EXISTS departments; 
- -- Departments master
+
  CREATE TABLE departments ( 
     dept_id   INT PRIMARY KEY AUTO_INCREMENT, 
     dept_name VARCHAR(50) NOT NULL UNIQUE, 
     location  VARCHAR(50) NOT NULL 
 ); 
- -- Staff table (dept is intentionally optional)
+
  CREATE TABLE staff ( 
     staff_id    INT PRIMARY KEY AUTO_INCREMENT, 
     first_name  VARCHAR(50) NOT NULL, 
@@ -20,25 +20,25 @@ DROP TABLE IF EXISTS departments;
     CONSTRAINT fk_staff_dept 
         FOREIGN KEY (dept_id) REFERENCES departments(dept_id) 
 ); 
- -- Seed Departments-- (Finance and R&D will have NO staff to demonstrate RIGHT/FULL JOIN behavior)
+ 
  INSERT INTO departments (dept_id, dept_name, location) VALUES 
 (1, 'IT',         'Bangalore'), 
 (2, 'HR',         'Hyderabad'), 
-(3, 'Finance',    'Mumbai'),     -- no staff 
+(3, 'Finance',    'Mumbai'),     
 (4, 'Marketing',  'Delhi'), 
 (5, 'Operations', 'Chennai'), 
 (6, 'R&D',        'Pune');       
  INSERT INTO staff (staff_id, first_name, last_name, age, salary, dept_id) VALUES
 (101, 'Amit',    'varma',  28, 55000.00, 1), 
 (102, 'Sneha',   'Reddy',  32, 60000.00, 2),       
-(103, 'Ravi',    'varma', 26, 48000.00, NULL), -- no department 
+(103, 'Ravi',    'varma', 26, 48000.00, NULL), 
 (104, 'Pooja',   'Iyer', 29, 52000.00, 4),  
 (105, 'Arjun',   'Mehta', 35, 75000.00, 1),        
 (106, 'Divya',   'Nair',  30, 50000.00, 5),       
 (107, 'Rahul',   'Kapoor',41, 91000.00, 1),     
-(108, 'Priya',   'Singh',  24, 42000.00, NULL), -- no department    
-(109, 'Vikram',  'Rao', 37, 68000.00, 4),    -- Marketing -- IT -- Operations -- IT       
-(110, 'Neha', 'Kulkarni',  33, 58500.00, 2);    -- Marketing -- HR   
+(108, 'Priya',   'Singh',  24, 42000.00, NULL), 
+(109, 'Vikram',  'Rao', 37, 68000.00, 4),    
+(110, 'Neha', 'Kulkarni',  33, 58500.00, 2);    
 
 
 select * from staff;
