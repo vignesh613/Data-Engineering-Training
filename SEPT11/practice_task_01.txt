@@ -1,0 +1,92 @@
+
+// 1. Insert a new student
+db.students.insertOne({
+  _id: 5,
+  name: "Karan Mehta",
+  age: 21,
+  email: "karan@example.com",
+  city: "Pune"
+});
+
+// 2. Find all students from Delhi
+db.students.find({ city: "Delhi" });
+
+// 3. Update Aman Kumar’s email
+db.students.updateOne(
+  { name: "Aman Kumar" },
+  { $set: { email: "aman.kumar@example.com" } }
+);
+
+// 4. Delete the student "Sneha Reddy"
+db.students.deleteOne({ name: "Sneha Reddy" });
+
+// 5. Create a unique index on student email
+db.students.createIndex({ email: 1 }, { unique: true });
+
+// 6. Create a compound index on department and credits in courses
+db.courses.createIndex({ department: 1, credits: -1 });
+
+// 7. Verify indexes
+db.students.getIndexes();
+db.courses.getIndexes();
+
+// 8. Query that benefits from compound index
+db.courses.find({ department: "CS" }).sort({ credits: -1 });
+
+// 9. Query that causes a COLLSCAN
+db.courses.find({ title: "Economics 101" });
+
+// 10. Number of students enrolled in each course
+db.enrollments.aggregate([
+  { $group: { _id: "$course_id", studentCount: { $sum: 1 } } }
+]);
+
+// 11. Average age of students per city
+db.students.aggregate([
+  { $group: { _id: "$city", avgAge: { $avg: "$age" } } }
+]);
+
+// 12. Highest credit course in CS department
+db.courses.aggregate([
+  { $match: { department: "CS" } },
+  { $sort: { credits: -1 } },
+  { $limit: 1 }
+]);
+
+// 13. Enrollments with student names
+db.enrollments.aggregate([
+  {
+    $lookup: {
+      from: "students",
+      localField: "student_id",
+      foreignField: "_id",
+      as: "student_info"
+    }
+  }
+]);
+
+// 14. Students with list of courses they enrolled in
+db.students.aggregate([
+  {
+    $lookup: {
+      from: "enrollments",
+      localField: "_id",
+      foreignField: "student_id",
+      as: "enrollments"
+    }
+  },
+  {
+    $lookup: {
+      from: "courses",
+      localField: "enrollments.course_id",
+      foreignField: "_id",
+      as: "courses"
+    }
+  }
+]);
+
+// 15. Count how many students got grade "A"
+db.enrollments.aggregate([
+  { $match: { grade: "A" } },
+  { $count: "A_grade_students" }
+]);
