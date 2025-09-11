@@ -1,0 +1,86 @@
+
+
+// 1. Insert a new patient
+db.patients.insertOne({
+  _id: 5,
+  name: "Karan Patel",
+  age: 40,
+  gender: "Male",
+  city: "Mumbai"
+});
+
+// 2. Find all doctors specializing in "Cardiology"
+db.doctors.find({ specialization: "Cardiology" });
+
+// 3. Update Ravi Sharma’s city to "Pune"
+db.patients.updateOne(
+  { name: "Ravi Sharma" },
+  { $set: { city: "Pune" } }
+);
+
+// 4. Delete one appointment with "status: Completed"
+db.appointments.deleteOne({ status: "Completed" });
+
+// 5. Create an index on patients.city
+db.patients.createIndex({ city: 1 });
+
+// 6. Create a compound index on specialization and experience in doctors
+db.doctors.createIndex({ specialization: 1, experience: -1 });
+
+// 7. Verify indexes
+db.patients.getIndexes();
+db.doctors.getIndexes();
+
+// 8. Query that benefits from compound index
+db.doctors.find({ specialization: "Cardiology" }).sort({ experience: -1 });
+
+// 9. Query that results in a COLLSCAN
+db.doctors.find({ name: "Dr. Amit" });
+
+// 10. Count how many appointments each doctor has handled
+db.appointments.aggregate([
+  { $group: { _id: "$doctor_id", appointmentCount: { $sum: 1 } } }
+]);
+
+// 11. Total consultation fees collected by each doctor
+db.appointments.aggregate([
+  { $group: { _id: "$doctor_id", totalFees: { $sum: "$fee" } } }
+]);
+
+// 12. Average age of patients per city
+db.patients.aggregate([
+  { $group: { _id: "$city", avgAge: { $avg: "$age" } } }
+]);
+
+// 13. Show all appointments with patient and doctor details
+db.appointments.aggregate([
+  {
+    $lookup: {
+      from: "patients",
+      localField: "patient_id",
+      foreignField: "_id",
+      as: "patient_info"
+    }
+  },
+  {
+    $lookup: {
+      from: "doctors",
+      localField: "doctor_id",
+      foreignField: "_id",
+      as: "doctor_info"
+    }
+  }
+]);
+
+// 14. Find doctors who have treated more than 1 patient
+db.appointments.aggregate([
+  { $group: { _id: "$doctor_id", uniquePatients: { $addToSet: "$patient_id" } } },
+  { $project: { doctor_id: "$_id", patientCount: { $size: "$uniquePatients" } } },
+  { $match: { patientCount: { $gt: 1 } } }
+]);
+
+// 15. Show patients who spent more than 3000 in total fees
+db.appointments.aggregate([
+  { $group: { _id: "$patient_id", totalSpent: { $sum: "$fee" } } },
+  { $match: { totalSpent: { $gt: 3000 } } }
+]);
