@@ -1,0 +1,18 @@
+Run Date: 2025-10-16 21:48:37
+
+--- Top Delayed Customers (Total Delayed Orders) ---
+customerid
+101    1
+102    1
+103    1
+104    1
+106    1
+105    0
+107    0
+
+--- Most Common Delivery Issues (Excluding 'None') ---
+delivery_issue
+Weather Delay    2
+Bad Address      1
+Customs Hold     1
+Missing          1
