@@ -1,0 +1,8 @@
+sale_id,product_id,store_id,quantity,unit_price,discount_pct_raw,cost,sale_date,product_name,category,total_cost,revenue,profit,profit_margin
+1,101,1001,5,120.0,0.1,80.0,2024-10-01,Laptop Pro,Electronics,400.0,540.0,140.0,0.25925925925925924
+2,102,1001,10,15.0,0.0,10.0,2024-10-01,Eco Mug,Home Goods,100.0,150.0,50.0,0.3333333333333333
+3,101,1002,3,120.0,0.0,80.0,2024-10-02,Laptop Pro,Electronics,240.0,360.0,120.0,0.3333333333333333
+4,103,1002,8,250.0,0.2,150.0,2024-10-02,Wireless Speaker,Electronics,1200.0,1600.0,400.0,0.25
+5,102,1001,5,15.0,0.05,10.0,2024-10-02,Eco Mug,Home Goods,50.0,71.25,21.25,0.2982456140350877
+6,103,1001,2,250.0,0.0,150.0,2024-10-03,Wireless Speaker,Electronics,300.0,500.0,200.0,0.4
+7,101,1002,1,120.0,0.0,80.0,2024-10-03,Laptop Pro,Electronics,80.0,120.0,40.0,0.3333333333333333
