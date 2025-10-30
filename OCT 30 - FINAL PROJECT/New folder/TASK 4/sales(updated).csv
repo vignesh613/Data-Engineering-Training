@@ -1,0 +1,10 @@
+product_id,product_name,quantity_sold,total_amount,sale_date
+101,Mouse,10,250.0,2023-10-01
+102,Coffee Maker,5,275.0,2023-10-15
+101,Mouse,15,375.0,2023-10-20
+103,Cable,20,100.0,2023-10-25
+102,Coffee Maker,8,440.0,2023-10-28
+104,Lamp,3,90.0,2023-10-30
+101,Mouse,5,125.0,2023-11-01
+105,Webcam,10,400.0,2023-11-02
+102,Coffee Maker,2,110.0,2023-11-03

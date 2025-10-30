@@ -1,0 +1,5 @@
+category,region,Total_Revenue,Total_Units_Sold,Number_of_Transactions
+Electronics,West,1250.0,50,3
+Appliances,East,715.0,13,2
+Electronics,North,250.0,50,2
+Home Goods,South,90.0,3,1

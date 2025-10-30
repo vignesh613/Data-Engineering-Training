@@ -1,0 +1,6 @@
+product_id,product_name,Total_Revenue,Total_Units_Sold,current_stock,reorder_point,Inventory_Status
+101,Mouse,1500.0,50,40,15,IN_STOCK
+102,Coffee Maker,1925.0,35,25,10,IN_STOCK
+103,Cable,250.0,50,10,50,CRITICAL_LOW_STOCK
+104,Lamp,90.0,3,17,5,IN_STOCK
+105,Webcam,200.0,5,5,2,IN_STOCK
